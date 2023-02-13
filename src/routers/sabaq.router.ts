@@ -17,6 +17,8 @@ class SabaqRouter {
     this.route.get("/getAllSabaq", sabaqController.fetchAll);
     this.route.post("/createSabaq", sabaqController.createSabaq);
     this.route.get("/getSabaqById/:id", sabaqController.fetchOne);
+    this.route.put("/updateSabaq/:id", sabaqController.updateSabaq);
+    this.route.delete("/deleteSabaq/:id", sabaqController.destroySabaq);
   }
 }
 

@@ -45,22 +45,30 @@ class SabaqController {
     }
   }
 
-  public async updateSantri(req: Request, res: Response): Promise<Response> {
+  public async updateSabaq(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const { name, halaqoh, asal } = req.body;
-      await Santri.findByIdAndUpdate(id, { name, halaqoh, asal });
-      return res.status(200).json({ msg: "success update data santri" });
+      const { date, surah, juz, page_juz, page_quran } = req.body;
+      let hari = getDayFromDate(date);
+      await Sabaq.findByIdAndUpdate(id, {
+        hari,
+        tanggal: date,
+        surah,
+        juz,
+        page_juz,
+        page_quran,
+      });
+      return res.status(200).json({ msg: "success update data sabaq" });
     } catch (error: any) {
       return res.status(400).json(error.message);
     }
   }
 
-  public async destroySantri(req: Request, res: Response): Promise<Response> {
+  public async destroySabaq(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      await Santri.findByIdAndRemove(id);
-      return res.status(200).json({ msg: "success delete data santri" });
+      await Sabaq.findByIdAndRemove(id);
+      return res.status(200).json({ msg: "success delete data sabaq" });
     } catch (error: any) {
       return res.status(400).json(error.message);
     }

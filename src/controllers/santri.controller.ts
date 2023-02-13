@@ -14,7 +14,7 @@ class SantriController {
   public async fetchOne(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const santri = await Santri.findOne({ _id: id });
+      const santri = await Santri.findOne({ _id: id }).populate("sabaq");
       return res.status(200).json({ msg: "success", data: santri });
     } catch (error: any) {
       return res.status(400).json(error.message);
