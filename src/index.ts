@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import main from "./config/mongodb";
 import authRouter from "./routers/auth.router";
 import santriRouter from "./routers/santri.router";
+import sabaqRouter from "./routers/sabaq.router";
 
 // Configuration
 config();
@@ -36,6 +37,7 @@ class App {
   public routers(): void {
     this.app.use("/api/v1/auth", authRouter);
     this.app.use("/api/v1/santri", santriRouter);
+    this.app.use("/api/v1/sabaq", sabaqRouter);
   }
 }
 

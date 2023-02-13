@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
+import Sabaq from "../models/Sabaq";
 import Santri from "../models/Santri";
+import { getDayFromDate } from "../utils/formater";
 
-class SantriController {
+class SabaqController {
   public async fetchAll(req: Request, res: Response): Promise<Response> {
     try {
-      const santri = await Santri.find().populate("Sabaq");
-      return res.status(200).json({ msg: "success", data: santri });
+      const sabaq = await Sabaq.find();
+      return res.status(200).json({ msg: "success", data: sabaq });
     } catch (error: any) {
       return res.status(400).json(error.message);
     }
@@ -14,18 +16,27 @@ class SantriController {
   public async fetchOne(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const santri = await Santri.findOne({ _id: id }).populate("Sabaq");
-      return res.status(200).json({ msg: "success", data: santri });
+      const sabaq = await Sabaq.findOne({ _id: id });
+      return res.status(200).json({ msg: "success", data: sabaq });
     } catch (error: any) {
       return res.status(400).json(error.message);
     }
   }
 
-  public async createSantri(req: Request, res: Response): Promise<Response> {
+  public async createSabaq(req: Request, res: Response): Promise<Response> {
     try {
-      const { name, halaqoh, asal } = req.body;
-      await Santri.create({ name, halaqoh, asal });
-      return res.status(201).json({ msg: "success create data santri" });
+      const { date, surah, juz, page_juz, page_quran, santri_id } = req.body;
+      let hari = getDayFromDate(date);
+      await Sabaq.create({
+        hari,
+        tanggal: date,
+        surah,
+        juz,
+        page_juz,
+        page_quran,
+        santri_id,
+      });
+      return res.status(201).json({ msg: "success create data sabaq" });
     } catch (error: any) {
       return res.status(400).json(error.message);
     }
@@ -53,4 +64,4 @@ class SantriController {
   }
 }
 
-export default new SantriController();
+export default new SabaqController();
