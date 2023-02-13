@@ -29,6 +29,7 @@ const SabaqSchema = new Schema(
     santri_id: {
       type: Schema.Types.ObjectId,
       ref: "Santri",
+      required: true,
     },
   },
   { timestamps: true }

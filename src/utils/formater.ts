@@ -1,4 +1,4 @@
-export const getDayFromDate = (value) => {
+export const getDayFromDate = (value: any) => {
   let date = new Date(value).getDay();
   switch (date) {
     case 0:

@@ -27,7 +27,8 @@ class SabaqController {
     try {
       const { date, surah, juz, page_juz, page_quran, santri_id } = req.body;
       let hari = getDayFromDate(date);
-      await Sabaq.create({
+      let santri: any = await Santri.findById(santri_id);
+      const sabaq: any = await Sabaq.create({
         hari,
         tanggal: date,
         surah,
@@ -36,6 +37,8 @@ class SabaqController {
         page_quran,
         santri_id,
       });
+      santri.sabaq.push(sabaq._id);
+      await santri.save();
       return res.status(201).json({ msg: "success create data sabaq" });
     } catch (error: any) {
       return res.status(400).json(error.message);
