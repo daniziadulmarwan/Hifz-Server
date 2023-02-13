@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import Sabaq from "./Sabaq";
 
 const SantriSchema = new Schema(
   {
@@ -23,5 +24,11 @@ const SantriSchema = new Schema(
   },
   { timestamps: true }
 );
+
+SantriSchema.pre("findOneAndRemove", async function (next) {
+  const sabaq: any = this;
+  await Sabaq.deleteMany({ santri_id: sabaq._id });
+  next();
+});
 
 export default model("Santri", SantriSchema);

@@ -45,7 +45,7 @@ class SantriController {
   public async destroySantri(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      await Santri.findByIdAndRemove(id);
+      await Santri.findOneAndRemove({ _id: id });
       return res.status(200).json({ msg: "success delete data santri" });
     } catch (error: any) {
       return res.status(400).json(error.message);
