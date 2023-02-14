@@ -19,9 +19,9 @@ const SantriSchema = new Schema(
   { timestamps: true }
 );
 
-SantriSchema.pre("findOneAndRemove", async function (next) {
-  const sabaq: any = this;
-  await Sabaq.deleteMany({ santri_id: sabaq._id });
+SantriSchema.pre("remove", async function (next) {
+  const santri: any = this;
+  await Sabaq.deleteMany({ santri_id: santri._id });
   next();
 });
 
