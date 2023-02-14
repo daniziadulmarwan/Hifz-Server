@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import Sabaq from "../models/Sabaq";
-import Santri from "../models/Santri";
 import { getDayFromDate } from "../utils/formater";
 
 class SabaqController {

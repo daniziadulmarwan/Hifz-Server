@@ -10,6 +10,7 @@ import authRouter from "./routers/auth.router";
 import santriRouter from "./routers/santri.router";
 import sabaqRouter from "./routers/sabaq.router";
 import sabqiRouter from "./routers/sabqi.router";
+import manzilRouter from "./routers/manzil.router";
 
 // Configuration
 config();
@@ -42,6 +43,7 @@ class App {
     this.app.use("/api/v1/santri", santriRouter);
     this.app.use("/api/v1/sabaq", sabaqRouter);
     this.app.use("/api/v1/sabqi", sabqiRouter);
+    this.app.use("/api/v1/manzil", manzilRouter);
   }
 }
 
