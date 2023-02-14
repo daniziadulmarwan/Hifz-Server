@@ -1,17 +1,26 @@
 import { Request, Response } from "express";
 import Sabaq from "../models/Sabaq";
+import Sabqi from "../models/Sabqi";
 import Santri from "../models/Santri";
 
 class SantriController {
   public async fetchAll(req: Request, res: Response): Promise<Response> {
     try {
-      const santri = await Santri.aggregate([
+      const santri: any = await Santri.aggregate([
         {
           $lookup: {
             from: Sabaq.collection.name,
             localField: "_id",
             foreignField: "santri_id",
             as: "sabaq",
+          },
+        },
+        {
+          $lookup: {
+            from: Sabqi.collection.name,
+            localField: "_id",
+            foreignField: "santri_id",
+            as: "sabqi",
           },
         },
       ]);
