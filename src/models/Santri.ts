@@ -15,12 +15,6 @@ const SantriSchema = new Schema(
       type: String,
       required: true,
     },
-    sabaq: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Sabaq",
-      },
-    ],
   },
   { timestamps: true }
 );
