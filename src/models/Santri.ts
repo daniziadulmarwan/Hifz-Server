@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import Sabaq from "./Sabaq";
+import Sabqi from "./Sabqi";
 
 const SantriSchema = new Schema(
   {
@@ -22,6 +23,7 @@ const SantriSchema = new Schema(
 SantriSchema.pre("remove", async function (next) {
   const santri: any = this;
   await Sabaq.deleteMany({ santri_id: santri._id });
+  await Sabqi.deleteMany({ santri_id: santri._id });
   next();
 });
 
