@@ -70,6 +70,19 @@ class SabaqController {
       return res.status(400).json(error.message);
     }
   }
+
+  public async getAllSabaqBySantriId(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
+    try {
+      const { id } = req.params;
+      const sabaq = await Sabaq.find().where("santri_id").equals(id);
+      return res.status(200).json({ msg: "success", data: sabaq });
+    } catch (error: any) {
+      return res.status(400).json(error.message);
+    }
+  }
 }
 
 export default new SabaqController();
