@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import Sabaq from "../models/Sabaq";
 import Sabqi from "../models/Sabqi";
-import Santri from "../models/Santri";
 import { getDayFromDate } from "../utils/formater";
 
 class SabaqController {
   public async fetchAll(req: Request, res: Response): Promise<Response> {
     try {
-      const sabqi = await Sabqi.find();
+      const sabqi = await Sabqi.find().select(
+        "_id hari tanggal surah juz page_juz page_quran"
+      );
       return res.status(200).json({ msg: "success", data: sabqi });
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -17,7 +17,9 @@ class SabaqController {
   public async fetchOne(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const sabqi = await Sabqi.findOne({ _id: id });
+      const sabqi = await Sabqi.findOne({ _id: id }).select(
+        "_id hari tanggal surah juz page_juz page_quran"
+      );
       return res.status(200).json({ msg: "success", data: sabqi });
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -67,6 +69,22 @@ class SabaqController {
       const { id } = req.params;
       await Sabqi.findByIdAndRemove(id);
       return res.status(200).json({ msg: "success delete data sabqi" });
+    } catch (error: any) {
+      return res.status(400).json(error.message);
+    }
+  }
+
+  public async getAllSabqiBySantriId(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
+    try {
+      const { id } = req.params;
+      const sabqi = await Sabqi.find()
+        .where("santri_id")
+        .equals(id)
+        .select("_id hari tanggal surah juz page_juz page_quran");
+      return res.status(200).json({ msg: "success", data: sabqi });
     } catch (error: any) {
       return res.status(400).json(error.message);
     }

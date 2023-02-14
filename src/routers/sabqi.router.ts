@@ -1,5 +1,5 @@
 import { Router } from "express";
-import sabaqController from "../controllers/sabaq.controller";
+import sabqiController from "../controllers/sabqi.controller";
 
 class SabqiRouter {
   private route: Router;
@@ -14,11 +14,16 @@ class SabqiRouter {
   }
 
   public router() {
-    this.route.get("/getAllSabaq", sabaqController.fetchAll);
-    this.route.post("/createSabaq", sabaqController.createSabaq);
-    this.route.get("/getSabaqById/:id", sabaqController.fetchOne);
-    this.route.put("/updateSabaq/:id", sabaqController.updateSabaq);
-    this.route.delete("/deleteSabaq/:id", sabaqController.destroySabaq);
+    this.route.get("/getAllSabqi", sabqiController.fetchAll);
+    this.route.post("/createSabqi", sabqiController.createSabqi);
+    this.route.get("/getSabqiById/:id", sabqiController.fetchOne);
+    this.route.put("/updateSabqi/:id", sabqiController.updateSabqi);
+    this.route.delete("/deleteSabqi/:id", sabqiController.destroySabqi);
+
+    this.route.get(
+      "/getAllSabqiBySantriId/:id",
+      sabqiController.getAllSabqiBySantriId
+    );
   }
 }
 

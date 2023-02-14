@@ -6,7 +6,9 @@ import { getDayFromDate } from "../utils/formater";
 class SabaqController {
   public async fetchAll(req: Request, res: Response): Promise<Response> {
     try {
-      const sabaq = await Sabaq.find();
+      const sabaq = await Sabaq.find().select(
+        "_id hari tanggal surah juz page_juz page_quran"
+      );
       return res.status(200).json({ msg: "success", data: sabaq });
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -16,7 +18,9 @@ class SabaqController {
   public async fetchOne(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const sabaq = await Sabaq.findOne({ _id: id });
+      const sabaq = await Sabaq.findOne({ _id: id }).select(
+        "_id hari tanggal surah juz page_juz page_quran"
+      );
       return res.status(200).json({ msg: "success", data: sabaq });
     } catch (error: any) {
       return res.status(400).json(error.message);
@@ -77,7 +81,10 @@ class SabaqController {
   ): Promise<Response> {
     try {
       const { id } = req.params;
-      const sabaq = await Sabaq.find().where("santri_id").equals(id);
+      const sabaq = await Sabaq.find()
+        .where("santri_id")
+        .equals(id)
+        .select("_id hari tanggal surah juz page_juz page_quran");
       return res.status(200).json({ msg: "success", data: sabaq });
     } catch (error: any) {
       return res.status(400).json(error.message);
