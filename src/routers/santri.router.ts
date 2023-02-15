@@ -15,7 +15,7 @@ class SantriRouter {
   }
 
   public router() {
-    // this.route.use(auth);
+    this.route.use(auth);
     this.route.get("/getAllSantri", santriController.fetchAll);
     this.route.post("/createSantri", santriController.createSantri);
     this.route.get("/getSantriById/:id", santriController.fetchOne);

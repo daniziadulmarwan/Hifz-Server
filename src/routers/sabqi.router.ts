@@ -1,5 +1,6 @@
 import { Router } from "express";
 import sabqiController from "../controllers/sabqi.controller";
+import { auth } from "../middlewares/auth";
 
 class SabqiRouter {
   private route: Router;
@@ -14,6 +15,7 @@ class SabqiRouter {
   }
 
   public router() {
+    this.route.use(auth);
     this.route.get("/getAllSabqi", sabqiController.fetchAll);
     this.route.post("/createSabqi", sabqiController.createSabqi);
     this.route.get("/getSabqiById/:id", sabqiController.fetchOne);

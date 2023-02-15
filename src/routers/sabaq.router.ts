@@ -1,5 +1,6 @@
 import { Router } from "express";
 import sabaqController from "../controllers/sabaq.controller";
+import { auth } from "../middlewares/auth";
 
 class SabaqRouter {
   private route: Router;
@@ -14,6 +15,7 @@ class SabaqRouter {
   }
 
   public router() {
+    this.route.use(auth);
     this.route.get("/getAllSabaq", sabaqController.fetchAll);
     this.route.post("/createSabaq", sabaqController.createSabaq);
     this.route.get("/getSabaqById/:id", sabaqController.fetchOne);
