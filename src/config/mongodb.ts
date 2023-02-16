@@ -9,7 +9,7 @@ const mongoOnline =
 const mongoOffline = "mongodb://127.0.0.1:27017/hfiz_book";
 
 async function main() {
-  await mongoose.connect(mongoOnline);
+  await mongoose.connect(mongoOffline);
 }
 
 export default main;
