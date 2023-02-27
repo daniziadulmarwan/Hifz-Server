@@ -75,6 +75,8 @@ class ManzilController {
       const manzil = await Manzil.find()
         .where("santri_id")
         .equals(id)
+        .where("status")
+        .equals("complete")
         .select("_id hari tanggal juz");
       return res.status(200).json({ msg: "success", data: manzil });
     } catch (error: any) {

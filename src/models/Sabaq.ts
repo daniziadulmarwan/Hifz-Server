@@ -26,6 +26,12 @@ const SabaqSchema = new Schema(
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      enum: ["complete", "uncomplete"],
+      default: "uncomplete",
+      required: true,
+    },
     santri_id: {
       type: Schema.Types.ObjectId,
       ref: "Santri",
