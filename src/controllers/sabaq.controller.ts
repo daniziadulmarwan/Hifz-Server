@@ -30,6 +30,7 @@ class SabaqController {
     try {
       const { date, surah, juz, page_juz, page_quran, santri_id } = req.body;
       let hari = getDayFromDate(date);
+      let status = page_juz == 20 ? "complete" : "uncomplete";
       await Sabaq.create({
         hari,
         tanggal: date,
@@ -38,6 +39,7 @@ class SabaqController {
         page_juz,
         page_quran,
         santri_id,
+        status,
       });
       return res.status(201).json({ msg: "success create data sabaq" });
     } catch (error: any) {
