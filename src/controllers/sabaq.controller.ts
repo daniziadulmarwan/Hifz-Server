@@ -85,7 +85,7 @@ class SabaqController {
       const sabaq = await Sabaq.find()
         .where("santri_id")
         .equals(id)
-        .select("_id hari tanggal surah juz page_juz page_quran");
+        .select("_id hari tanggal surah juz page_juz page_quran status");
       return res.status(200).json({ msg: "success", data: sabaq });
     } catch (error: any) {
       return res.status(400).json(error.message);
