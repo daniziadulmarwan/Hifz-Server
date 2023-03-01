@@ -6,7 +6,7 @@ class SabaqController {
   public async fetchAll(req: Request, res: Response): Promise<Response> {
     try {
       const sabaq = await Sabaq.find().select(
-        "_id hari tanggal surah juz page_juz page_quran"
+        "_id hari tanggal surah juz page_juz page_quran status"
       );
       return res.status(200).json({ msg: "success", data: sabaq });
     } catch (error: any) {
@@ -18,7 +18,7 @@ class SabaqController {
     try {
       const { id } = req.params;
       const sabaq = await Sabaq.findOne({ _id: id }).select(
-        "_id hari tanggal surah juz page_juz page_quran"
+        "_id hari tanggal surah juz page_juz page_quran status"
       );
       return res.status(200).json({ msg: "success", data: sabaq });
     } catch (error: any) {
