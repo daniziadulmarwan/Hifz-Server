@@ -7,14 +7,10 @@ class AuthController {
   public async signup(req: Request, res: Response): Promise<Response> {
     try {
       const { name, username, password } = req.body;
-      const salt = bcrypt.genSaltSync();
+      const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync(password, salt);
-      const dataUser = {
-        name,
-        username,
-        password: hashedPassword,
-      };
-      await User.create(dataUser);
+      const user = new User({ name, username, password: hashedPassword });
+      await user.save();
       return res.status(201).json({ msg: "success create data user" });
     } catch (error: any) {
       return res.status(400).json(error.message);
