@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
+import { SabaqTypes } from "../types/types";
 
-const SabaqSchema = new Schema(
+const SabaqSchema = new Schema<SabaqTypes>(
   {
     hari: {
       type: String,
