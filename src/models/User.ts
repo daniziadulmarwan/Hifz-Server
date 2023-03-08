@@ -1,13 +1,14 @@
 import { Schema, model, Document } from "mongoose";
+import type { UserTypes } from "../types/types";
 
-export interface IUser {
-  name: string;
-  username: string;
-  password: string;
-  refresh_token: string;
-}
+// export interface IUser {
+//   name: string;
+//   username: string;
+//   password: string;
+//   refresh_token: string;
+// }
 
-interface IUSerDocument extends IUser, Document {}
+interface IUSerDocument extends UserTypes, Document {}
 
 const userSchema = new Schema<IUSerDocument>(
   {

@@ -10,3 +10,10 @@ export type SabaqTypes = {
   status: string;
   santri_id: ObjectId;
 };
+
+export type UserTypes = {
+  name: string;
+  username: string;
+  password: string;
+  refresh_token: string;
+};
